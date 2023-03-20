@@ -101,7 +101,7 @@ function BoxOp(){
 
 
     this.auto_rotate_xyz= async function(box, callback, apply_mask, on_box_changed, noscaling, rotate_method){
-
+        console.log('---------------------------------')
         let orgBox = box;
         box = {
                 position: {x: box.position.x, y: box.position.y, z: box.position.z},

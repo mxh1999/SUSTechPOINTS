@@ -13,7 +13,7 @@ import json
 
 util.config_gpu()
 
-
+print('ep1')
 RESAMPLE_NUM = 10
 
 model_file = "./algos/models/deep_annotation_inference.h5"
@@ -24,6 +24,7 @@ rotation_model.summary()
 NUM_POINT=512
 
 def sample_one_obj(points, num):
+    print('=============sample one obj=========')
     if points.shape[0] < NUM_POINT:
         return np.concatenate([points, np.zeros((NUM_POINT-points.shape[0], 3), dtype=np.float32)], axis=0)
     else:
@@ -32,6 +33,7 @@ def sample_one_obj(points, num):
         return points[idx[0:num]]
 
 def predict_yaw(points):
+    print('=============predict yaw=========')
     points = np.array(points).reshape((-1,3))
     input_data = np.stack([x for x in map(lambda x: sample_one_obj(points, NUM_POINT), range(RESAMPLE_NUM))], axis=0)
     pred_val = rotation_model.predict(input_data)

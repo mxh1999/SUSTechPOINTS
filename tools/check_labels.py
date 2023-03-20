@@ -15,7 +15,7 @@ class LabelChecker:
         "BabyCart","Cart","Cone","FireHydrant","SaftyTriangle","PlatformCart","ConstructionCart","RoadBarrel","TrafficBarrier","LongVehicle","BicycleGroup","ConcreteTruck",
         "Tram","Excavator","Animal","TrashCan","ForkLift","Trimotorcycle","FreightTricycle,","Crane","RoadRoller","Bulldozer","DontCare","Misc","Unknown","Unknown1","Unknown2",
         "Unknown3","Unknown4","Unknown5",
-        ]
+        ]               # TODO: yesname
 
         self.messages = []
     

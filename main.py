@@ -138,10 +138,13 @@ class Root(object):
     @cherrypy.expose    
     @cherrypy.tools.json_out()
     def predict_rotation(self):
+      print('-------------predict rotate---------------------')
       cl = cherrypy.request.headers['Content-Length']
       rawbody = cherrypy.request.body.readline().decode('UTF-8')
       
       data = json.loads(rawbody)
+      print('-------------predict rotate---------------------')
+      print(data)
       
       return {"angle": pre_annotate.predict_yaw(data["points"])}
       #return {}

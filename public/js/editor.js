@@ -1218,7 +1218,7 @@ function Editor(editorUi, wrapperUi, editorCfg, data, name="editor"){
 
 
 
-    this.object_category_changed= function(event){
+    this.object_category_changed= function(event){          //TODO:yesname
         if (this.selected_box){
             
             let category = event.currentTarget.value;

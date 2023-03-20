@@ -285,6 +285,7 @@ var ml = {
     // },
 
     predict_rotation: function(data){
+        console.log("begin predict rotatoin.")
         const req = new Request("/predict_rotation");
         let init = {
             method: 'POST',

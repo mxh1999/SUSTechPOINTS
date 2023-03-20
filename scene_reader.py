@@ -1,6 +1,7 @@
 
 import os
 import json
+from scannet_init import scannet_init
 
 this_dir = os.path.dirname(os.path.abspath(__file__))
 root_dir = os.path.join(this_dir, "data")
@@ -39,6 +40,11 @@ def get_one_scene(s):
     }
 
     scene_dir = os.path.join(root_dir, s)
+    if not (s[0] =='-' and s[1] == '-'):
+        if not os.path.exists(os.path.join(scene_dir, "lidar")):
+            with open(os.path.join(root_dir, 'extra.txt'), 'r') as f:
+                dataset_path = f.readline().strip()
+            scannet_init(scene_dir, os.path.join(dataset_path, s), s)
 
     frames = os.listdir(os.path.join(scene_dir, "lidar"))
     
