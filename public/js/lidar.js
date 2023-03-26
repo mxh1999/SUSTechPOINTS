@@ -290,6 +290,7 @@ function Lidar(sceneMeta, world, frameInfo){
     };
 
     this.color_objects = function(){
+        console.log('color_objects')
         if (this.data.cfg.color_obj != "no"){
             this.world.annotation.boxes.map((b)=>{
                 if (!b.annotator)
@@ -1167,6 +1168,7 @@ function Lidar(sceneMeta, world, frameInfo){
     };
 
     this.reset_box_points_color = function(box){
+        console.log('reset_box_points_color')
         let color = this.points.geometry.getAttribute("color").array;
         let indices = this._get_points_index_of_box(this.points, box, 1.0);
         if (this.data.cfg.color_points=="intensity")
@@ -1188,9 +1190,9 @@ function Lidar(sceneMeta, world, frameInfo){
         else
         {
             indices.forEach((i)=>{
-                color[i*3] =  this.data.cfg.point_brightness;
-                color[i*3+1] = this.data.cfg.point_brightness;
-                color[i*3+2] = this.data.cfg.point_brightness; 
+                color[i*3] =  this.pcd.ori_color[i*3]//this.data.cfg.point_brightness;
+                color[i*3+1] = this.pcd.ori_color[i*3+1]//this.data.cfg.point_brightness;
+                color[i*3+2] = this.pcd.ori_color[i*3+2]//this.data.cfg.point_brightness; 
             });
         }
     };
@@ -1199,7 +1201,7 @@ function Lidar(sceneMeta, world, frameInfo){
     this.set_box_points_color=function(box, target_color){
         //var pos = this.points.geometry.getAttribute("position");
         var color = this.points.geometry.getAttribute("color");
-
+        console.log('set_box_points_color', box, target_color)
         if (!target_color){
             if (this.data.cfg.color_obj == "category")
             {
@@ -1215,7 +1217,7 @@ function Lidar(sceneMeta, world, frameInfo){
 
             }
         }
-
+        console.log('---', target_color)
         if (target_color)
         {
 

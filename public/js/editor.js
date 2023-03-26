@@ -369,7 +369,7 @@ function Editor(editorUi, wrapperUi, editorCfg, data, name="editor"){
         
     };
 
-    this.handleFastToolEvent= function(event){
+    this.handleFastToolEvent= function(event){      // yesname
 
         let self = this;
         switch (event.currentTarget.id){
@@ -487,11 +487,12 @@ function Editor(editorUi, wrapperUi, editorCfg, data, name="editor"){
     };
 
     this.focusOnSelectedBox = function(box){
+        console.log('selected box')
         if (this.editorCfg.disableMainView)
             return;
 
         if (box){
-            this.data.world.lidar.highlight_box_points(box);
+            this.data.world.lidar.highlight_box_points(box);    //yesname
             
             this.floatLabelManager.hide_all();
             this.viewManager.mainView.orbit.saveState();
@@ -2517,12 +2518,13 @@ function Editor(editorUi, wrapperUi, editorCfg, data, name="editor"){
         
     };
 
-    this.updateBoxPointsColor= function(box){
+    this.updateBoxPointsColor= function(box){       // yesname
         if (this.data.cfg.color_obj != "no"){
             if (box.last_info){
-                box.world.lidar.set_box_points_color(box.last_info, {x: this.data.cfg.point_brightness, y: this.data.cfg.point_brightness, z: this.data.cfg.point_brightness});
+                box.world.lidar.reset_box_points_color(box.last_info)
+                // box.world.lidar.set_box_points_color(box.last_info, {x: this.data.cfg.point_brightness, y: this.data.cfg.point_brightness, z: this.data.cfg.point_brightness});
             }
-
+            
             box.world.lidar.set_box_points_color(box);
             box.world.lidar.update_points_color();            
         }

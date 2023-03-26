@@ -264,6 +264,7 @@ PCDLoader.prototype = {
 		var position = [];
 		var normal = [];
 		var color = [];
+		var ori_color = [];
 		var velocity = [];
 		var intensity = [];
 
@@ -324,6 +325,7 @@ PCDLoader.prototype = {
 					var g = ( rgb >> 8 ) & 0x0000ff;
 					var b = ( rgb >> 0 ) & 0x0000ff;
 					color.push( r / 255, g / 255, b / 255 );
+					ori_color.push( r / 255, g / 255, b / 255 );
 
 				}
 
@@ -490,7 +492,9 @@ PCDLoader.prototype = {
 					color.push( dataview.getUint8( row + offset.rgb + 2 ) / 255.0 );
 					color.push( dataview.getUint8( row + offset.rgb + 1 ) / 255.0 );
 					color.push( dataview.getUint8( row + offset.rgb + 0 ) / 255.0 );
-
+					ori_color.push( dataview.getUint8( row + offset.rgb + 2 ) / 255.0 );
+					ori_color.push( dataview.getUint8( row + offset.rgb + 1 ) / 255.0 );
+					ori_color.push( dataview.getUint8( row + offset.rgb + 0 ) / 255.0 );
 				}
 
 				if ( offset.normal_x !== undefined ) {
@@ -522,6 +526,7 @@ PCDLoader.prototype = {
 		return {
 			position: position,
 			color: color,
+			ori_color: ori_color,
 			normal: normal,
 			velocity: velocity,
 			intensity: intensity,

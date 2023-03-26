@@ -16,7 +16,7 @@ class Config{
     point_brightness = 0.6;
     box_opacity = 1;
     show_background = true;
-    color_obj = "category";
+    color_obj = "no";
     theme = "dark";
 
     enableFilterPoints = false;
