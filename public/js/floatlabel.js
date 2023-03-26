@@ -228,6 +228,11 @@ class FastToolBox{
             this.setAttrOptions(event.currentTarget.value, this.ui.querySelector("#attr-input").value);
             this.eventHandler(event);
         };
+        this.ui.querySelector("#object-category-selector").addEventListener("keydown", e=>e.stopPropagation());
+        this.ui.querySelector("#object-category-selector").addEventListener("keyup", event=>{
+            event.stopPropagation();
+            this.eventHandler(event);
+        });
 
 
         this.ui.querySelector("#object-track-id-editor").onchange =    event=>this.eventHandler(event);

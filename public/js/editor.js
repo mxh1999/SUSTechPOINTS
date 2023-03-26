@@ -1893,7 +1893,7 @@ function Editor(editorUi, wrapperUi, editorCfg, data, name="editor"){
     };
 
     this.add_box= function(pos, scale, rotation, obj_type, obj_track_id, obj_attr){
-        let box = this.data.world.annotation.add_box(pos, scale, rotation, obj_type, obj_track_id, obj_attr);
+        let box = this.data.world.annotation.add_box(pos, scale, rotation, obj_type, obj_track_id, obj_attr);       // yesname
 
         this.floatLabelManager.add_label(box);
         

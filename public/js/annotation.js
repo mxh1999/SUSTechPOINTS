@@ -41,6 +41,16 @@ function Annotation(sceneMeta, world, frameInfo){
 
         return null;
     };
+    this.findNextBox = function(box) {
+        if (this.boxes){
+            let id = this.boxes.findIndex(function(x){
+                return x.obj_track_id == box.id;
+            });
+            return this.boxes[id+1];
+        }
+
+        return null;
+    }
 
     this.findIntersectedBoxes = function(box){
         return this.boxes.filter(b=>b!=box).filter(b=>intersect(box, b));
