@@ -28,7 +28,7 @@ function Annotation(sceneMeta, world, frameInfo){
 
     this.sort_boxes = function(){
         this.boxes = this.boxes.sort(function(x,y){
-            return x.position.y - y.position.y;
+            return x.obj_track_id - y.obj_track_id;
         });
     };
     this.findBoxByTrackId = function(id){
@@ -43,10 +43,39 @@ function Annotation(sceneMeta, world, frameInfo){
     };
     this.findNextBox = function(box) {
         if (this.boxes){
-            let id = this.boxes.findIndex(function(x){
-                return x.obj_track_id == box.id;
-            });
-            return this.boxes[id+1];
+            if (box) {
+                let id = this.boxes.findIndex(function(x){
+                    return x.obj_track_id == box.obj_track_id;
+                });
+                if (id + 1 >= this.boxes.length) {
+                    return null;
+                }
+                return this.boxes[id+1];
+            }
+            if (this.boxes.length > 0) {
+                return this.boxes[0]
+            }
+            return null;
+        }
+
+        return null;
+    }
+
+    this.findPreviousBox = function(box) {
+        if (this.boxes){
+            if (box) {
+                let id = this.boxes.findIndex(function(x){
+                    return x.obj_track_id == box.obj_track_id;
+                });
+                if (id - 1 < 0) {
+                    return null;
+                }
+                return this.boxes[id - 1];
+            }
+            if (this.boxes.length > 0) {
+                return this.boxes[this.boxes.length - 1]
+            }
+            return null;
         }
 
         return null;

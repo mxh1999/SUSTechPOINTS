@@ -210,7 +210,9 @@ function Editor(editorUi, wrapperUi, editorCfg, data, name="editor"){
             this.boxOp, 
             (b)=>this.on_box_changed(b),
             (b)=>this.remove_box(b),
-            "main-boxe-ditor");
+            "main-box-editor",
+            ()=>this.previous_box(),
+            ()=>this.next_box());
         this.boxEditor.detach(); // hide it
         this.boxEditor.setResize("both");
         this.boxEditor.moveHandle = new MovableView(
@@ -2022,7 +2024,7 @@ function Editor(editorUi, wrapperUi, editorCfg, data, name="editor"){
 
     
 
-    this.keydown= function( ev ) {
+    this.keydown= function( ev ) {          // yesname
 
         // if (this.keydownDisabled)
         //     return;
@@ -2121,6 +2123,12 @@ function Editor(editorUi, wrapperUi, editorCfg, data, name="editor"){
                     this.on_box_changed(this.selected_box);                
                 }
                 break;
+            case 'b':
+                this.previous_box();
+                break;
+            case 'n':
+                this.next_box();
+                break;
             case 'a':
                 if (this.selected_box){
                     let v = Math.max(this.editorCfg.moveStep * this.selected_box.scale.y, 0.02);
@@ -2192,7 +2200,24 @@ function Editor(editorUi, wrapperUi, editorCfg, data, name="editor"){
         }
     };
 
-
+    this.next_box = function() {
+        let nxt = this.data.world.annotation.findNextBox(this.selected_box)
+        if (nxt) {
+            this.selectBox(nxt)
+        } else {
+            this.unselectBox(this.selected_box)
+        }
+        this.render()
+    }
+    this.previous_box = function() {
+        let nxt = this.data.world.annotation.findPreviousBox(this.selected_box)
+        if (nxt) {
+            this.selectBox(nxt)
+        } else {
+            this.unselectBox(this.selected_box)
+        }
+        this.render()
+    }
 
     this.previous_frame= function(){
 

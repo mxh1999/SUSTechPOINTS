@@ -21,6 +21,8 @@ class ProjectiveView{
         on_reset_rotate, 
         on_focus, 
         on_box_remove,
+        on_prev_box,
+        on_next_box,
         fn_isActive)
     {
 
@@ -772,6 +774,8 @@ class ProjectiveView{
                 break;
             case 'w':
             case 'ArrowUp':
+                console.log('ArrowUp');
+                break;
                 event.preventDefault();
                 event.stopPropagation();
                 this.on_moved({x:0, y: this.cfg.moveStep});
@@ -789,30 +793,44 @@ class ProjectiveView{
                 }
                 break;
             case 'ArrowDown':
+                console.log('ArrowDown');
+                break;
                 event.preventDefault();
                 event.stopPropagation();
                 this.on_moved({x:0, y:-this.cfg.moveStep});
                 this.hide_buttons(true);
                 break;
+            case 'b':
+                this.on_prev_box();
+                break;
+            case 'n':
+                this.on_next_box();
+                break;
             case 'a':
+                console.log('a')
                 if (event.ctrlKey)
                 {
                     break;
                 }
                 // no break;
             case 'ArrowLeft':
+                console.log('ArrowLeft');
+                break;
                 event.preventDefault();
                 event.stopPropagation();
                 this.on_moved({x:-this.cfg.moveStep, y:0});
                 this.hide_buttons(true);
                 break;
             case 'd':
+                console.log('d')
                 if (event.ctrlKey){
                     console.log("ctrl+d");
                     this.on_box_remove();
                     break;
                 }
             case 'ArrowRight':
+                console.log('ArrowRight');
+                break;
                 event.preventDefault();
                 event.stopPropagation();
                 this.on_moved({x:this.cfg.moveStep, y:0});
@@ -889,7 +907,7 @@ class ProjectiveView{
 
 
 class ProjectiveViewOps{
-    constructor(ui, editorCfg, boxEditor, views, boxOp, func_on_box_changed,func_on_box_remove){
+    constructor(ui, editorCfg, boxEditor, views, boxOp, func_on_box_changed,func_on_box_remove, func_on_prev_box, func_on_next_box){
 
         this.ui = ui;
         this.cfg = editorCfg;
@@ -899,6 +917,18 @@ class ProjectiveViewOps{
         this.boxEditor = boxEditor;
         //internals
         var scope = this;
+
+        function default_on_prev_box() {
+            if (scope.box) {
+                func_on_prev_box();
+            }
+        }
+
+        function default_on_next_box() {
+            if (scope.box) {
+                func_on_next_box();
+            }
+        }
 
         function default_on_del(){
             if (scope.box){
@@ -1191,6 +1221,8 @@ class ProjectiveViewOps{
                                             on_z_reset_rotate,
                                             default_on_focus,
                                             default_on_del,
+                                            default_on_prev_box,
+                                            default_on_next_box,
                                             this.isActive.bind(this));
 
 
@@ -1323,6 +1355,8 @@ class ProjectiveViewOps{
                                                     on_y_reset_rotate,
                                                     default_on_focus,
                                                     default_on_del,
+                                                    default_on_prev_box,
+                                                    default_on_next_box,
                                                     this.isActive.bind(this));
 
 
@@ -1454,6 +1488,8 @@ class ProjectiveViewOps{
                                                     on_x_reset_rotate,
                                                     default_on_focus,
                                                     default_on_del,
+                                                    default_on_prev_box,
+                                                    default_on_next_box,
                                                     this.isActive.bind(this));
 
     }  // end of constructor

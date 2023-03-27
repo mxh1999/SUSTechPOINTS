@@ -16,7 +16,7 @@ import { logger } from "./log.js";
 2) setTarget, tryAttach, resetTarget, this is only for batch-editor-manager
 */
 function BoxEditor(parentUi, boxEditorManager, viewManager, cfg, boxOp, 
-    func_on_box_changed, func_on_box_remove, name){
+    func_on_box_changed, func_on_box_remove, name, func_on_prev_box = null, func_on_next_box = null){
     
     this.boxEditorManager = boxEditorManager;
     this.parentUi = parentUi;
@@ -38,7 +38,9 @@ function BoxEditor(parentUi, boxEditorManager, viewManager, cfg, boxOp,
         this.boxView.views,
         this.boxOp,
         func_on_box_changed,
-        func_on_box_remove);
+        func_on_box_remove,
+        func_on_prev_box,
+        func_on_next_box);
 
     this.focusImageContext = new BoxImageContext(this.ui.querySelector("#focuscanvas"));
     
