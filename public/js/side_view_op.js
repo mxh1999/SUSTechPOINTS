@@ -774,8 +774,6 @@ class ProjectiveView{
                 break;
             case 'w':
             case 'ArrowUp':
-                console.log('ArrowUp');
-                break;
                 event.preventDefault();
                 event.stopPropagation();
                 this.on_moved({x:0, y: this.cfg.moveStep});
@@ -793,8 +791,6 @@ class ProjectiveView{
                 }
                 break;
             case 'ArrowDown':
-                console.log('ArrowDown');
-                break;
                 event.preventDefault();
                 event.stopPropagation();
                 this.on_moved({x:0, y:-this.cfg.moveStep});
@@ -814,8 +810,6 @@ class ProjectiveView{
                 }
                 // no break;
             case 'ArrowLeft':
-                console.log('ArrowLeft');
-                break;
                 event.preventDefault();
                 event.stopPropagation();
                 this.on_moved({x:-this.cfg.moveStep, y:0});
@@ -829,8 +823,6 @@ class ProjectiveView{
                     break;
                 }
             case 'ArrowRight':
-                console.log('ArrowRight');
-                break;
                 event.preventDefault();
                 event.stopPropagation();
                 this.on_moved({x:this.cfg.moveStep, y:0});
