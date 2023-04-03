@@ -5,6 +5,7 @@ from dataset_init.scannet_init import scannet_init
 
 this_dir = os.path.dirname(os.path.abspath(__file__))
 root_dir = os.path.join(this_dir, "data")
+dataset_dir = os.path.join(this_dir, "raw_data")
 
 def get_all_scenes():
     all_scenes = get_scene_names()
@@ -19,10 +20,8 @@ def get_all_scene_desc():
     return descs
 
 def get_scene_names():
-    with open(os.path.join(root_dir, 'extra.txt'), 'r') as f:
-        dataset_path = f.readline().strip()
-    scans = os.listdir(dataset_path)
-    scans = [x for x in scans if os.path.isdir(os.path.join(dataset_path, x))]
+    scans = os.listdir(dataset_dir)
+    scans = [x for x in scans if os.path.isdir(os.path.join(dataset_dir, x))]
     for scan in scans:
         if not os.path.exists(os.path.join(root_dir, scan)):
             os.makedirs(os.path.join(root_dir, scan))
@@ -50,9 +49,7 @@ def get_one_scene(s):
     scene_dir = os.path.join(root_dir, s)
     if not (s[0] =='-' and s[1] == '-'):
         if not os.path.exists(os.path.join(scene_dir, "lidar")):
-            with open(os.path.join(root_dir, 'extra.txt'), 'r') as f:
-                dataset_path = f.readline().strip()
-            scannet_init(scene_dir, dataset_path, s)
+            scannet_init(scene_dir, dataset_dir, s)
 
     frames = os.listdir(os.path.join(scene_dir, "lidar"))
     
