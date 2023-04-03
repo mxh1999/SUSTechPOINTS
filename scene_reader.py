@@ -19,12 +19,19 @@ def get_all_scene_desc():
     return descs
 
 def get_scene_names():
-      scenes = os.listdir(root_dir)
-      scenes = [x for x in scenes if os.path.isdir(os.path.join(root_dir, x))]
-      scenes = filter(lambda s: not os.path.exists(os.path.join(root_dir, s, "disable")), scenes)
-      scenes = list(scenes)
-      scenes.sort()
-      return scenes
+    with open(os.path.join(root_dir, 'extra.txt'), 'r') as f:
+        dataset_path = f.readline().strip()
+    scans = os.listdir(dataset_path)
+    scans = [x for x in scans if os.path.isdir(os.path.join(dataset_path, x))]
+    for scan in scans:
+        if not os.path.exists(os.path.join(root_dir, scan)):
+            os.makedirs(os.path.join(root_dir, scan))
+    scenes = os.listdir(root_dir)
+    scenes = [x for x in scenes if os.path.isdir(os.path.join(root_dir, x))]
+    scenes = filter(lambda s: not os.path.exists(os.path.join(root_dir, s, "disable")), scenes)
+    scenes = list(scenes)
+    scenes.sort()
+    return scenes
 
 def get_scene_desc(s):
     scene_dir = os.path.join(root_dir, s)
